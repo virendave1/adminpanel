@@ -1,0 +1,122 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Edit Product</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="text-decoration: none;" routerLink="../overview">Dashboard</a></li>
+                <li class="breadcrumb-item active">Edit Product</li>
+            </ol> 
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card"> 
+            <form  #form="ngForm" enctype="multipart/form-data"> 
+                <div class="form-body">
+                    <div class="card-body">
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Product Name <span class="required">*</span></label>
+                                    <input type="text" #name  [(ngModel)]="ProdnameTxt" name="name" class="form-control" placeholder="Product Name" required>                                    
+                                 </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Product Image <span class="required">*</span></label>
+                                    <input type="file"  accept="image/*" #image="ngModel" [(ngModel)]="ProdImage" name="image" title="" class="form-control" (change)="ImageChange($event.target.files)" multiple required/>
+                                 </div>
+                            </div> 
+                        </div> 
+                        <div class="row pt-3">
+                           
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Category <span class="required">*</span></label>
+                                    <select id="Category" #category [(ngModel)]="Prodcategory" name="category" class="form-control" (change)="categoryChange($event.target.value)" required>
+                                        <option *ngFor="let post of categorylist" [value]="post._id"> {{post.name}}</option>
+                                      </select>                                    
+                                 </div>
+                        </div> 
+                        <div class="col-md-6">
+                            <div class="form-group" id="category_form">
+                                <label class="control-label">Sub Category <span class="required">*</span></label>
+                                <select id="Category" #subCategory [(ngModel)]="Prodsubcategory" name="subCategory" class="form-control" required>
+                                    <option *ngFor="let post of subcategorylist" [value]="post._id"> {{post.subCategory}}</option>
+                                  </select>                                
+                             </div>
+                        </div> 
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Color </label>
+                                    <input type="text" #color [(ngModel)]="Prodcolor" name="color" class="form-control" placeholder="Product Color" >                                    
+                                 </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">SKU </label>
+                                    <input type="text" #sku [(ngModel)]="Prodsku" name="sku" class="form-control" placeholder="Product SKU" >                                    
+                                 </div>
+                            </div> 
+                            </div>
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Price</label>
+                                    <input type="text" #price [(ngModel)]="Prodprice" name="price" class="form-control" placeholder="Product Price">                              
+                                 </div>
+                                 
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Tags</label>
+                                    <input type="text" #tags [(ngModel)]="Prodtags" name="tags" class="form-control" placeholder="Product tag">                                    
+                                 </div>
+                            </div> 
+                        </div>
+                            <div class="row pt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group" id="category_form">
+                                        <label class="control-label">Product Type <span class="required">*</span></label> 
+                                        <select id="Category"  #typeProduct [(ngModel)]="Prodtype" name="typeProduct" class="form-control" required>
+                                            <option value="All"> All Product</option>
+                                            <option value="Hot"> Hot Product</option>
+                                            <option value="New"> New Product</option>
+                                            <option value="Sales">Sales Product</option>
+                                            <option value="Best"> Best Sellers</option>
+                                        </select>
+                                    </div>
+                                    
+                                </div> 
+                                <div class="col-md-6">
+                                    <div class="form-group" id="category_form">
+                                        <label class="control-label">Banner Image</label>
+                                        <input type="file" #bannerImage [(ngModel)]="Prodbanner" name="bannerImage"  accept="image/*" class="form-control" placeholder="Product Banner"  (change)="ImageChange2($event.target.files)">                                    
+                                     </div>
+                                </div> 
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="form-group col-md-12" id="category_form">
+                                        <label class="control-label">Description </label>
+                                        <ckeditor [editor]="Editor" data="" #description [(ngModel)]="Proddescription" name="description"></ckeditor>                                         
+                                     </div>
+                                </div>
+                        </div> 
+                    <div class="form-actions">
+                        <div class="card-body">
+                            <button type="submit"  [disabled]="!form.valid" class="btn btn-success m-r-10" (click)="insert();">  <i class="fa fa-check"></i> Create</button>
+                          
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

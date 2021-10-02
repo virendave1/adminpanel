@@ -1,0 +1,40 @@
+.page-title-header {
+    margin-bottom: 20px;
+    margin-top: 5vw;
+}
+
+@media (max-width: 1030px) 
+{ 
+.page-title-header{
+    margin-top: 8vw;
+    margin-bottom: 2vw;
+}
+}
+@media (max-width: 770px) 
+{ 
+.page-title-header {
+  margin-bottom: 20px;
+  margin-top: 10vw;
+}
+}
+@media (max-width: 540px) 
+{ 
+  .page-title-header {
+    margin-bottom: 20px;
+    margin-top: 15vw;
+}
+}
+@media (max-width: 380px) 
+{ 
+  .page-title-header {
+    margin-bottom: 20px;
+    margin-top: 30vw;
+}
+}
+@media (max-width: 360px) 
+{ 
+  .page-title-header {
+    margin-bottom: 20px;
+    margin-top: 30vw;
+}
+}

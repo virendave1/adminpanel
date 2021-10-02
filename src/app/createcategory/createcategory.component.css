@@ -1,0 +1,55 @@
+.row.page-titles {
+    margin-top: 5vw;
+}
+#submit_categories{
+    margin-top:2vw;
+}
+#category_form{
+    margin-bottom:2vw;
+}
+
+
+@media (max-width: 1030px) 
+{ 
+.row.page-titles{
+    margin-top: 8vw;
+    margin-bottom: 2vw;
+}
+}
+@media (max-width: 770px) 
+{ 
+    .row.page-titles {
+  margin-bottom: 20px;
+  margin-top: 10vw;
+}
+}
+@media (max-width: 540px) 
+{ 
+  
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 10vw;
+}
+}
+@media (max-width: 380px) 
+{ 
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 20vw;
+}
+}
+@media (max-width: 360px) 
+{ 
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 2ovw;
+}
+}
+
+@media (max-width: 280px) 
+{ 
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 25vw;
+}
+}

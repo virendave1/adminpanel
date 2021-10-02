@@ -1,0 +1,25 @@
+<html>
+<head>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <div class="fadeIn first">
+            <img src="./assets/images/login.jpg" id="icon" alt="User Icon" />
+            <h1>Login</h1>
+          </div>
+          <form  #form="ngForm">
+            <input type="text" id="login" class="fadeIn second" #email  ngModel  name="email" placeholder="Username" >
+            <input type="password" id="password" class="fadeIn third" #password ngModel name="password" placeholder="Password">
+            <input type="button" class="fadeIn fourth" value="Log In" (click)="loginCredential(form.value);" >
+          </form>
+          <div class="col-sm-12 text-center" id="error_message">
+
+          </div>
+            <div id="formFooter">
+            <a class="underlineHover" href="javascript:void(0)">Forget password ?</a>
+          </div>   
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Create Categories</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="text-decoration: none;" routerLink="../overview">Dashboard</a></li>
+                <li class="breadcrumb-item active">Create Categories</li>
+            </ol> 
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card"> 
+            <form  #form="ngForm"  enctype="multipart/form-data"> 
+                <div class="form-body">
+                    <div class="card-body">
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Category Name<span class="required">*</span></label>
+                                    <input type="text" #name ngModel name="name" class="form-control"  class="form-control" placeholder="Category Name" required>                                    
+                                 </div>
+                            </div> 
+                           
+                        </div> 
+                        <div class="row pt-3">
+                            <div class="col-md-12">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Description <span class="required">*</span></label>
+                                   <ckeditor [editor]="Editor" id="description_content" data=""  #description [(ngModel)]="category_description"  name="description"></ckeditor>      
+                                 </div>
+                            </div> 
+                        </div>   
+                    </div> 
+                    <div class="form-actions">
+                        <div class="card-body">
+                            <button type="submit"  [disabled]="!form.valid" class="btn btn-success m-r-10"  (click)="savecategory(form.value);">  <i class="fa fa-check"></i> Create</button>
+                          
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

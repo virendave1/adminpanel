@@ -1,0 +1,61 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Categories</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="text-decoration: none;" routerLink="../overview">Dashboard</a></li>
+                <li class="breadcrumb-item active">Categories</li>
+            </ol> 
+        </div>
+    </div>
+</div>
+ 
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">   
+                <div class="button-group f-r p-b-10">                 
+                    <button type="button"  (click)="exportAsXLSX()" class="btn waves-effect waves-light btn-primary"><i class="fa fa-download m-r-5"></i>Export to Excel</button>        
+                    <div class='Excelfile btn btn-primary'>
+                        <label for='input-file'><i class="fa fa-upload m-r-5"> </i>Import from Excel</label>  
+                        <input type="file" id='input-file' appReadexcel  (eventEmitter)="DataFromEventEmitter($event)"/>
+                    </div>     
+
+                </div> 
+                
+                <div class="col-sm-6">
+                    <button type="button" id="add_btn" routerLink="../createcategory" class="btn waves-effect waves-light btn-primary"><i class="fa fa-plus-circle m-r-5"></i>Add Category</button>      
+                 </div>
+                
+
+                <div class="table-responsive m-t-20">
+                    <div id="example23_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">                         
+                        <table id="example"  class="display nowrap table table-hover table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;" >
+                        <thead>
+                            <tr>
+                                <th>Category Title</th> 
+                                <th>Description</th>
+                                <th>Published</th> 
+                                <th>Action</th>
+                            </tr>
+                        </thead> 
+                        <tbody id="table_body">
+                            <tr role="row" class="odd"  *ngFor="let post of categorylist">
+                                <td><a style="color:black;text-decoration: none;" href="javascript:void(0)">{{post.name}}</a></td>
+                                <td><a style="color:black;text-decoration: none;" href="javascript:void(0)">{{post.description}}</a></td>
+                                <td><a style="color:black;text-decoration: none;" href="javascript:void(0)">{{post.updatedAt}}</a></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger"  style="background-color:#284CF0;" (click)="edit(post._id)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger"  (click)="delete(post._id)"><i class="fa fa-trash"></i></button></td>
+                            </tr>                                                            
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>         
+        </div> 
+    </div>   
+</div>
+</div>

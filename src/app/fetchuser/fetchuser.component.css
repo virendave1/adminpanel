@@ -1,0 +1,61 @@
+body {
+    background-color: #F3F3F3;
+    overflow-x: hidden;
+  }
+.row.page-titles {
+    margin-top: 5vw;
+}
+#edit_button{
+    margin-right: 2vw;
+}
+
+#add_button{
+    margin-right: 2vw;
+    margin-left: 3vw;
+    margin-top: 1vw;
+}
+@media (max-width: 1030px) 
+{ 
+.row.page-titles{
+    margin-top: 8vw;
+    margin-bottom: 2vw;
+}
+}
+
+@media (max-width: 770px) 
+{ 
+    .row.page-titles {
+  margin-bottom: 20px;
+  margin-top: 10vw;
+}
+}
+@media (max-width: 540px) 
+{ 
+  
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 10vw;
+}
+}
+@media (max-width: 380px) 
+{ 
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 20vw;
+}
+}
+@media (max-width: 360px) 
+{ 
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 20vw;
+}
+}
+
+@media (max-width: 280px) 
+{ 
+    .row.page-titles {
+    margin-bottom: 20px;
+    margin-top: 25vw;
+}
+}

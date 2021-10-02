@@ -1,0 +1,162 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "NeonaAdmin": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/NeonaAdmin",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/fonts/ionicons-2.0.1/css/ionicons.min.css",
+              "src/assets/fonts/Font-Awesome-4.7.0/Font-Awesome-4.7.0/css/font-awesome.min.css",
+              "src/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css",
+              "src/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css",
+              "src/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css",
+              "src/assets/vendors/css/vendor.bundle.base.css",
+              "src/assets/vendors/css/vendor.bundle.addons.css",
+              "src/assets/css/shared/style.css",
+              "src/assets/css/css/style.css",
+
+
+              "src/assets/datatable/css/buttons.dataTables.min.css",
+              "src/assets/datatable/css/jquery.dataTables.min.css"
+            ],
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/bootstrap/js/bootstrap.bundle.min.js",
+              "./node_modules/slick-carousel/slick/slick.js",
+              "./node_modules/slick-carousel/slick/slick.min.js",
+              "src/assets/js/dashboardjs/dashboard.js",
+              "src/assets/js/shared/off-canvas.js",
+              "src/assets/js/main.js",
+              "src/assets/js/page.js",
+
+
+
+              "src/assets/datatable/js/jquery.dataTables.min.js",
+              "src/assets/datatable/js/dataTables.buttons.min.js",
+              "src/assets/datatable/js/buttons.flash.min.js",
+              "src/assets/datatable/js/jszip.min.js",
+              "src/assets/datatable/js/pdfmake.min.js",
+              "src/assets/datatable/js/vfs_fonts.js",
+              "src/assets/datatable/js/buttons.html5.min.js",
+              "src/assets/datatable/js/buttons.print.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "7mb",
+                  "maximumError": "7mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "NeonaAdmin:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "NeonaAdmin:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "NeonaAdmin:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "NeonaAdmin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "NeonaAdmin:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "NeonaAdmin",
+  "cli": {
+    "analytics": "bab202ba-723d-49e9-90a4-04fb0bfb1696"
+  }
+}

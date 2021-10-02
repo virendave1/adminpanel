@@ -1,0 +1,18 @@
+#sidebar{
+    padding-top:40px;
+    min-height: calc(100vh);
+}
+#sidebar i.fa {
+    font-size: 1.3vw;
+    margin-right: 1vw;
+}
+
+@media (max-width: 280px) 
+{
+    #sidebar{
+        padding-top:10px;
+    }
+#sidebar i.fa {
+    margin-right: 3.5vw;
+}  
+}
