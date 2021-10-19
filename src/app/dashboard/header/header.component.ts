@@ -23,6 +23,5 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('name');
     localStorage.removeItem('email');
     this.router.navigate(['/login']);
-    console.log('token has been destoryed form localtorage');
   }
 }

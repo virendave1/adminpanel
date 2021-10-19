@@ -22,7 +22,7 @@ export class EditqueryComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(paramsId => {
       const ID = paramsId.id;
-      this.Id = ID;   
+      this.Id = ID;  
     });
   }
   insert(){ 
@@ -31,14 +31,12 @@ export class EditqueryComponent implements OnInit {
     var jsonstr = { 
 "status":this.querystatus,
     }
-    console.log(jsonstr);
     if (this.querystatus== null){
       this.querystatus ='';
     }
     this.http.post( url, jsonstr, { headers: this.headers } )
     .subscribe(Response => {
       const result = Response.json(); 
-      console.log(result);
       this.router.navigate(['Admin/enquiry']);
     });
   }

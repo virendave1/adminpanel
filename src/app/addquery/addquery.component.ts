@@ -34,7 +34,6 @@ export class AddqueryComponent implements OnInit {
       const result = Response.json(); 
       alert("Query Added Successfully !");
         this.router.navigate(['/Admin/enquiry']);
-      console.log(result);
     },
     error => {
       var valid =  error._body;

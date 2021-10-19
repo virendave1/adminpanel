@@ -22,35 +22,54 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">User Name <span class="required">*</span></label>
-                                    <input type="text" #name ngModel name="name" class="form-control"  class="form-control" placeholder="Username" required>                                    
+                                    <input type="text" #name  [(ngModel)]="usernameTxt" name="name" class="form-control"  class="form-control" placeholder="Username" required>                                    
                                  </div>
                             </div> 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Email Address <span class="required">*</span></label>
-                                    <input type="text"  #email  ngModel name="email" class="form-control" placeholder="Email" required> 
+                                    <input type="email"  #email  [(ngModel)]="emailTxt" name="email" class="form-control" placeholder="Email" required> 
                                 </div>
                             </div> 
                             <div class="row pt-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Password <span class="required">*</span></label>
-                                    <input type="password" #password ngModel name="password" class="form-control" placeholder="Password" required> 
+                                    <input type="password" #password [(ngModel)]="passwordTxt" name="password" class="form-control" placeholder="Password" required> 
                                 </div>
                             </div> 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Contact <span class="required">*</span></label>
-                                    <input type="text" #contact ngModel name="contact" class="form-control" placeholder="Contact No" required> 
+                                    <input type="number" #contact [(ngModel)]="contactTxt" name="contact" class="form-control" placeholder="Contact No"  required> 
+           
                                 </div>
                             </div> 
                             </div>
+                            
+                            <div class="row pt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="Permission" >Access Permission<span class="required">*</span></label>
+                                        <select id="Permission" #permissions [(ngModel)]="permissionTxt" name="permissions" class="form-control"(click)="get();" required>
+                                          <option *ngFor="let post of access" [value]="post._id"> {{post.name}}</option>
+                                        </select> 
+                                        <!-- Access Permission :
+                                        <div >
+                                            <label *ngFor="let post of access" for="Permission">
+                                              <input id="Permission" type="checkbox" #permissions name="permissions" [value]="post._id" (change)="getIds($event,post.id);"/>
+                                              {{post.name}}
+                                            </label>
+                                          </div> -->
+                                     </div>
+                                </div> 
+                            </div>  
                         </div>  
                     </div> 
                     <div class="form-actions">
                         <div class="card-body">
-                            <button type="submit" [disabled]="!form.valid" class="btn btn-success m-r-10"  (click)="Registeration(form.value);">  <i class="fa fa-check"></i> Create</button>
-                            
+                            <button type="submit" [disabled]="!form.valid" class="btn btn-success m-r-10"  (click)="Registeration();">  <i class="fa fa-check"></i> Create</button>
+                          
                         </div>
                     </div>
                 </div>

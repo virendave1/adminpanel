@@ -9,15 +9,28 @@
             <h1>Login</h1>
           </div>
           <form  #form="ngForm">
-            <input type="text" id="login" class="fadeIn second" #email  ngModel  name="email" placeholder="Username" >
-            <input type="password" id="password" class="fadeIn third" #password ngModel name="password" placeholder="Password">
-            <input type="button" class="fadeIn fourth" value="Log In" (click)="loginCredential(form.value);" >
+            <input type="text" id="login" class="fadeIn second" #email  [(ngModel)]="emailtxt"  name="email" placeholder="Username" required>
+            <div class="col-sm-12 text-center" id="error_message" style="display: none;color: red;">
+              Email Cannot be Empty !!
+            </div>
+            <div class="col-sm-12 text-center" id="error_message1" style="display: none;color: red;">
+              Please enter valid Email !!
+            </div>
+            
+            <input type="password" id="password" class="fadeIn third" #password ngModel name="password" placeholder="Password" required>
+            <i class="fa fa-eye" id="togglePassword" onclick="password();"></i>
+            <i class="fa fa-eye-slash" style="display:none;" id="togglePasswordslash" ></i>
+            <div class="col-sm-12 text-center" id="error_message2" style="display: none;color: red;">
+              Password Cannot be Empty !!
+            </div>
+            <div class="col-sm-12 text-center" id="error_message3" style="display: none;color: red;">
+              Password Cannot be Empty !!
+            </div>
+            <input type="button" class="fadeIn fourth" value="Log In" (click)="loginCredential(form.value);" onclick="validate();" >
           </form>
-          <div class="col-sm-12 text-center" id="error_message">
-
-          </div>
+          
             <div id="formFooter">
-            <a class="underlineHover" href="javascript:void(0)">Forget password ?</a>
+            <!-- <a class="underlineHover" href="javascript:void(0)">Forget password ?</a> -->
           </div>   
         </div>
       </div>

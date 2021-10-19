@@ -33,10 +33,8 @@ export class EditsubcategoryComponent implements OnInit {
     .subscribe(Response => {
       let result = Response.json();
       const table=result.subCategory;
-      console.log(table);
       this.subCategoryTxt = table.subCategory;
       this.categorynameTxt = table.category._id;
-      console.log(this.categorynameTxt);
     });
   }
   categorylist:any;
@@ -45,7 +43,6 @@ export class EditsubcategoryComponent implements OnInit {
     .subscribe(Response => {
       const result = Response.json(); 
       this.categorylist = result.category;
-     console.log(this.categorylist);
     });
   }
 
@@ -57,8 +54,6 @@ export class EditsubcategoryComponent implements OnInit {
       "category":this.categorynameTxt,
     }
     var abc = JSON.stringify(jsonstr);
-    console.log(abc,'====');
-    console.log(jsonstr);
     if (this.subCategoryTxt== null){
       this.subCategoryTxt ='';
     }
@@ -68,7 +63,6 @@ export class EditsubcategoryComponent implements OnInit {
     this.http.put( url, jsonstr, { headers: this.headers } )
     .subscribe(Response => {
       const result = Response.json(); 
-      console.log(result);
       this.router.navigate(['Admin/sub-category']);
     },
   error => {

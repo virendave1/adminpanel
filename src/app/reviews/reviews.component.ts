@@ -26,7 +26,6 @@ export class ReviewsComponent implements OnInit {
     .subscribe(Response => {
       const result = Response.json(); 
       this.reviewlist = result.review;
-     console.log(this.reviewlist);
      tabledats();
     });
   }
@@ -58,7 +57,6 @@ export class ReviewsComponent implements OnInit {
     for(let i of data){
       this.reviewlist.push(i);
     } 
-    console.log(this.reviewlist); 
      this.exceluploadServer();
   }
   exceluploadServer(){
@@ -66,7 +64,6 @@ export class ReviewsComponent implements OnInit {
       "content": this.reviewlist
     }
     var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify==========="); 
     const url = hostport + 'product';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       
@@ -92,5 +89,4 @@ export class ReviewsComponent implements OnInit {
  edit(id:any){
   this.router.navigate(['/Admin/editreview', {id: id }]);
 } 
-  
 }

@@ -104,7 +104,6 @@ function more_products_1()
   document.getElementById('more_option_product_5').style.display='flex';
   document.getElementById('more_option_product_6').style.display='flex';
   document.getElementById('more_option_1').style.display='none';
- 
 }
 function reset(){
   document.getElementById("myForm").reset();
@@ -207,4 +206,52 @@ function getprice(){
   else{
     document.getElementById("prices").style.display=none;
   }
+}
+function password(){
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+togglePassword.addEventListener('click', function (e) {
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
+  this.classList.toggle('fa-eye-slash');
+});
+}
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+function validate(){
+  var email= document.getElementById("login").value;
+  var password= document.getElementById("password").value;
+  if (email== "" || email==null )  {
+  document.getElementById("error_message").style.display='block';
+  document.getElementById("error_message1").style.display='none';
+  return false;
+}
+if(password== "" || password==null){
+  document.getElementById("error_message").style.display='none';
+  document.getElementById("error_message1").style.display='none';
+  document.getElementById("error_message2").style.display='block';
+  return false;
+}
+if (validateEmail(email)) {
+  document.getElementById("error_message").style.display='none';
+  document.getElementById("error_message2").style.display='none';
+  return true;
+}
+// else if (password== "" || password==null) {
+//   document.getElementById("error_message").style.display='none';
+//   document.getElementById("error_message1").style.display='none';
+//   document.getElementById("error_message2").style.display='block';
+
+//   return false;
+// } 
+
+else {
+  document.getElementById("error_message").style.display='none';
+  document.getElementById("error_message1").style.display='block';
+  document.getElementById("error_message2").style.display='none';
+}
+return false;
 }

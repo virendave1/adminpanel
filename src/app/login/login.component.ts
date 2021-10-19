@@ -20,17 +20,15 @@ export class LoginComponent implements OnInit {
    userid = localStorage.getItem('userid');
    ngOnInit(): void {    
    }
-  
+   emailtxt:any;
   loginCredential(credentials:any){
     const url = hostport + 'login'
     this.http.post(url, credentials).subscribe(Response => {
-         const data=Response.json();
-         console.log(data);  
+         const data=Response.json(); 
          localStorage.setItem('email' , data.data.user.email); 
          localStorage.setItem('token' , data.token); 
          localStorage.setItem('name' , data.data.user.name); 
-         const reload = 'FirstTimeLogintrue';
-        //  localStorage.setItem('reloadFlag' , reload);   
+         const reload = 'FirstTimeLogintrue';   
          this.router.navigate(['/Admin/overview']);    
      });
 }

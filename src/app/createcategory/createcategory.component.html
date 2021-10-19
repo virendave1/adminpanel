@@ -22,23 +22,31 @@
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Category Name<span class="required">*</span></label>
-                                    <input type="text" #name ngModel name="name" class="form-control"  class="form-control" placeholder="Category Name" required>                                    
+                                    <input type="text" #name [(ngModel)]="Categoryname" name="name" class="form-control"  class="form-control" placeholder="Category Name" required>                                    
                                  </div>
                             </div> 
-                           
+                            <div class="col-md-6">
+                                <div class="form-group" id="category_form">
+                                    <label class="control-label">Category Image</label>
+                                    <input  #file type="file"  src=[url] accept="image/*" #image="ngModel" [(ngModel)]="Categoryimage" name="image" title="" class="form-control" (change)="preview($event);ImageChange($event.target.files);" />         
+                                 </div>
+                                 <div id="preview_div">
+                                    <img id="preview_img" *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
+                                </div>
+                            </div> 
                         </div> 
-                        <div class="row pt-3">
-                            <div class="col-md-12">
+                        <div class="row pt-3" id="category_descriptn">
+                            <div class="col-md-12" >
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Description <span class="required">*</span></label>
-                                   <ckeditor [editor]="Editor" id="description_content" data=""  #description [(ngModel)]="category_description"  name="description"></ckeditor>      
+                                   <ckeditor [editor]="Editor" id="description_content" data=""  #description [(ngModel)]="category_description"  name="description" required></ckeditor>      
                                  </div>
                             </div> 
                         </div>   
                     </div> 
                     <div class="form-actions">
                         <div class="card-body">
-                            <button type="submit"  [disabled]="!form.valid" class="btn btn-success m-r-10"  (click)="savecategory(form.value);">  <i class="fa fa-check"></i> Create</button>
+                            <button type="submit"  [disabled]="!form.valid" class="btn btn-success m-r-10"  (click)="insert();">  <i class="fa fa-check"></i> Create</button>
                           
                         </div>
                     </div>

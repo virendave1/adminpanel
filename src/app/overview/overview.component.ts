@@ -46,6 +46,7 @@ export class OverviewComponent implements OnInit {
     this.getproduct();
     this.getusers();
     this.getclients();
+    this.getaccess();
   }
   categorylist:any;
 catcount:any;
@@ -169,7 +170,19 @@ catcount:any;
       this.clientname= this.testimoniallist.name;
       this.clientreview= this.testimoniallist.message;
       this.postdate= this.testimoniallist.createdAt;
-     console.log(this.testimoniallist);
+    });
+  }
+  access=[];
+  accsesspermission:any=[];
+  getaccess(){
+    this.http.get( hostport +'access-permission', { headers: this.headers } )
+    .subscribe(Response => {
+      const result = Response.json(); 
+      this.access = result.accessPermissions;
+      for(let i=0;i<=this.access.length;i++){
+        this.accsesspermission=result.accessPermissions[i];
+      }
+
     });
   }
 }

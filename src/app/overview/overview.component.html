@@ -296,7 +296,7 @@
                             <div class="d-flex py-2 border-bottom" *ngFor="let post of testimoniallist">
                               <div class="wrapper" >
                                 <small class="text-muted">{{post.name}}</small>
-                                <p class="font-weight-semibold text-gray mb-0"> {{post.message}}</p>
+                                <p class="font-weight-semibold text-gray mb-0" [innerHTML]="post.message"></p>
                               </div>
                             </div>
                             <a class="d-block mt-5" style="text-decoration: none;" routerLink="../testimonial">Show all</a>

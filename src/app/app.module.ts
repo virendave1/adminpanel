@@ -36,6 +36,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { EdittestimonialComponent } from './edittestimonial/edittestimonial.component';
 import { CreatetestimonialComponent } from './createtestimonial/createtestimonial.component';
+import { FeaturedproductComponent } from './featuredproduct/featuredproduct.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { CreatetestimonialComponent } from './createtestimonial/createtestimonia
     TestimonialComponent,
     EdittestimonialComponent,
     CreatetestimonialComponent,
+    FeaturedproductComponent,
   ],
   imports: [
     BrowserModule,

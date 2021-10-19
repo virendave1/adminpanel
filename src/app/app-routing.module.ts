@@ -25,6 +25,7 @@ import { AddqueryComponent } from './addquery/addquery.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { CreatetestimonialComponent } from './createtestimonial/createtestimonial.component';
 import { EdittestimonialComponent } from './edittestimonial/edittestimonial.component';
+import { FeaturedproductComponent } from './featuredproduct/featuredproduct.component';
 
 const routes: Routes = [
   { path:'', component:LoginComponent, pathMatch: 'full'  },
@@ -51,7 +52,8 @@ const routes: Routes = [
    {path:'editsubcategory',component:EditsubcategoryComponent},
    {path:'testimonial',component:TestimonialComponent},
    {path:'createtestimonial',component:CreatetestimonialComponent},
-   {path:'edittestimonial',component:EdittestimonialComponent}
+   {path:'edittestimonial',component:EdittestimonialComponent},
+   {path:'featuredproduct',component:FeaturedproductComponent}
   ]}
 ];
 

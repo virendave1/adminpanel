@@ -7,18 +7,51 @@ html {
     font-family: "Poppins", sans-serif;
     height: 100vh;
   }
-  #error_message {
+  #error_message{
     color: black;
     font-size: 1vw;
     padding: 0.4vw;
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
-    margin-left: 9.9vw;
-    background-color: palegoldenrod;
-    margin-bottom: 2vw;
+    margin-left: 2.5vw;
     display: none;
-    margin-top: -1vw;
-
+    margin-top: -0.1vw;
     border-radius: 6px;
+}
+#error_message2{
+  color: black;
+  font-size: 1vw;
+  padding: 0.4vw;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-left: 2.5vw;
+  display: none;
+  margin-top: -0.1vw;
+  border-radius: 6px;
+}
+#error_message1{
+  color: black;
+  font-size: 1vw;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-left: 2.7vw;
+  display: none;
+  margin-top: -0.1vw;
+  border-radius: 6px;
+}
+#error_message3{
+  color: black;
+  font-size: 1vw;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-left: 2.7vw;
+  display: none;
+  margin-top: -0.1vw;
+  border-radius: 6px;
 }
   a {
     color: #92badd;

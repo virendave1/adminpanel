@@ -22,13 +22,14 @@ export class QueryComponent implements OnInit {
     this.getquery();
   }
   querylist:any;
+  queries:any;
   getquery(){
     this.http.get( hostport +'query', { headers: this.headers } )
     .subscribe(Response => {
       const result = Response.json(); 
       this.querylist = result.queryInfo;
+      this.queries=result.queryInfo.productId;
       tabledats();
-     console.log(this.querylist);
      
     });
   }
@@ -60,7 +61,6 @@ export class QueryComponent implements OnInit {
     for(let i of data){
       this.querylist.push(i);
     } 
-    console.log(this.querylist); 
      this.exceluploadServer();
   }
   exceluploadServer(){
@@ -68,7 +68,6 @@ export class QueryComponent implements OnInit {
       "content": this.querylist
     }
     var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify==========="); 
     const url = hostport + 'product';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       

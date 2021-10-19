@@ -56,10 +56,12 @@
                                 <td><a href="javascript:void(0)" style="color:black;text-decoration:none;">{{post.message}}</a></td>
                                 <td><a href="javascript:void(0)" style="color:black;text-decoration:none;">{{post.contact}}</a></td>
                                 <td><a href="javascript:void(0)" style="color:black;text-decoration:none;">{{post.productId.name}}</a></td>
+            
                                 <td><a href="javascript:void(0)" style="color:black;text-decoration:none;">{{post.productId._id}}</a></td>
                                 <td><a href="javascript:void(0)" style="color:black;text-decoration:none;">{{post.status}}</a></td>
                                 <td><button type="button" class="btn btn-danger" style="background-color:#284CF0;" (click)="edit(post._id)"><i class="fa fa-edit"></i></button>
-                                 </td>
+                                    <button type="button" class="btn btn-danger"  (click)="delete(post._id)"><i class="fa fa-trash"></i></button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>                    

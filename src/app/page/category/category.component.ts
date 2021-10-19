@@ -3,7 +3,6 @@ import { Http , Headers} from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { hostport,tabledats} from 'src/app/app.component';
 import { ExcelService } from 'src/app/excel.service';
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -34,12 +33,8 @@ export class CategoryComponent implements OnInit {
       const result = Response.json(); 
       this.categorylist = result.category;
       tabledats();
-     console.log(this.categorylist);
     });
   }
-
-
-  
   delete(id:any){
     const httpOptions = {
       headers: new Headers({
@@ -67,7 +62,6 @@ export class CategoryComponent implements OnInit {
     for(let i of data){
       this.categorylist.push(i);
     } 
-    console.log(this.categorylist); 
      this.exceluploadServer();
   }
   exceluploadServer(){
@@ -75,7 +69,6 @@ export class CategoryComponent implements OnInit {
       "content": this.categorylist
     }
     var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify==========="); 
     const url = hostport + 'category';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       
@@ -113,7 +106,6 @@ insert(){
   this.http.put( url, jsonstr, { headers: this.headers } )
   .subscribe(Response => {
     const result = Response.json(); 
-    console.log(result);
     this.router.navigate(['/Admin/category']);
   });
 }

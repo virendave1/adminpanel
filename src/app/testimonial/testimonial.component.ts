@@ -34,7 +34,6 @@ export class TestimonialComponent implements OnInit {
       const result = Response.json(); 
       this.testimoniallist = result.testimonials;
       tabledats();
-     console.log(this.testimoniallist);
     });
   }
   delete(id:any){
@@ -65,7 +64,6 @@ export class TestimonialComponent implements OnInit {
     for(let i of data){
       this.testimoniallist.push(i);
     } 
-    console.log(this.testimoniallist); 
      this.exceluploadServer();
   }
   exceluploadServer(){
@@ -73,7 +71,6 @@ export class TestimonialComponent implements OnInit {
       "content": this.testimoniallist
     }
     var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify==========="); 
     const url = hostport + 'testimonials';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       

@@ -25,7 +25,6 @@ export class VerifiedreviewComponent implements OnInit {
       const result = Response.json(); 
       this.reviewlist = result.review;
       tabledats();
-     console.log(this.reviewlist);
     });
   }
 
@@ -56,15 +55,13 @@ export class VerifiedreviewComponent implements OnInit {
     for(let i of data){
       this.reviewlist.push(i);
     } 
-    console.log(this.reviewlist); 
      this.exceluploadServer();
   }
   exceluploadServer(){
     var jsonstr = { 
       "content": this.reviewlist
     }
-    var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify==========="); 
+    var abc = JSON.stringify(jsonstr); 
     const url = hostport + 'product';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       
@@ -89,6 +86,5 @@ export class VerifiedreviewComponent implements OnInit {
  
  edit(id:any){
   this.router.navigate(['/Admin/editreview', {id: id }]);
-} 
-  
+}  
 }

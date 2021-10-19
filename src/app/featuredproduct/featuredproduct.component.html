@@ -1,12 +1,12 @@
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">Products</h4>
+        <h4 class="text-themecolor">Featured Products</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a style="text-decoration: none;" routerLink="../overview">Dashboard</a></li>
-                <li class="breadcrumb-item active">Products</li>
+                <li class="breadcrumb-item active">Featured Products</li>
             </ol> 
         </div>
     </div>
@@ -19,19 +19,18 @@
                     <button type="button" (click)="exportAsXLSX()" class="btn waves-effect waves-light btn-primary"><i class="fa fa-download m-r-5"></i>Export to Excel</button>        
                     <div class='Excelfile btn btn-primary'>
                         <label for='input-file'><i class="fa fa-upload m-r-5"> </i>Import from Excel</label>  
-                        <input type="file" id='input-file' appReadexcel  (eventEmitter)="DataFromEventEmitter($event)"  />
+                        <input type="file" id='input-file' appReadexcel #readexcel (eventEmitter)="DataFromEventEmitter($event)"  />
                     </div>     
 
                 </div> 
                 
                 <div class="col-sm-6">
-                    <button type="button" id="add_btn" routerLink="../createproduct" class="btn waves-effect waves-light btn-primary"><i class="fa fa-plus-circle m-r-5"></i>Add Product</button>  
+                    <button type="button" style="visibility: hidden;" id="add_btn" routerLink="../createproduct" class="btn waves-effect waves-light btn-primary"><i class="fa fa-plus-circle m-r-5"></i>Add Product</button>  
                 </div>
                   <div class="card" id="project" style="box-shadow: 0 0 0 0 rgb(90 113 208 / 11%);
                   border: solid 1px transparent;">
                     <ul class="nav nav-tabs" style="border-bottom: 2px solid black;border-left: 0px solid white;border-top: 0px solid white;border-right: 0px solid white;">
-                      <li  class="" id="s1"><a href="#all" id="arrivals_link" data-toggle="tab"><span>All Products</span></a></li>
-                      <li class="" id="s2"><a href="#admin" id="admin_link" data-toggle="tab"><span>Admin Products</span></a></li></ul>
+                      <li  class="" ><a href="#all"  data-toggle="tab"><span></span></a></li></ul>
                   <div class="tab-content" >
                     <div  class="tab-pane active" id="all">
                 <div class="table-responsive m-t-20">
@@ -39,79 +38,37 @@
                         <table id="example"  class="display nowrap table table-hover table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;" >
                         <thead>
                             <tr>
-                                <th (click)="getfeaturedproduct();">Product Name </th>
+                                <th>Product Name </th>
                                 <th>Product Type  </th>
                                 <th>Category  </th>
-                                <!-- <th>Description  </th>  -->
+                                <th>Description  </th> 
                                 <th> Image   </th>
                                 <!-- <th>Banner Image   </th>
                                 <th>Product Color   </th>
                                 <th>Product Tags   </th> -->
                                 <th>Action   </th>
                             </tr>
-                            
                         </thead> 
                         <tbody id="table_body">
                             <tr role="row" class="odd" id="sub_category_tr" *ngFor="let post of productlist ">
                                 <td>{{post.name}}</td>
                                 <td>{{post.typeProduct}}</td>
                                 <td>{{post.category.name}}</td>
-                                <!-- <td><p [innerHTML]="post.description"></p></td> -->
+                                <td><p [innerHTML]="post.description"></p></td>
                                 <td><img  id="post_img" src="{{post.image[0]}}" /></td>
                                 <!-- <td><img  id="post_img" src="{{post.bannerImage}}" /></td>
                                 <td>{{post.color}}</td>
                                 <td>{{post.tags}}</td> -->
                                 <td>
-                                    <button  type="button" id="edit_btn" class="btn btn-primary" (click)="modal1(post._id)">Add To <i class="fa fa-bitbucket"></i></button>
-                                    <button type="button" id="edit_btn" class="btn btn-primary" (click)="edit(post._id)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" id="edit_btn" class="btn btn-primary" (click)="modal1(post._id)">Delete From <i class="fa fa-bitbucket"></i></button>
+                                    <!-- <button type="button" id="edit_btn" class="btn btn-primary" (click)="edit(post._id)"><i class="fa fa-edit"></i></button> -->
                                     <button type="button" class="btn btn-primary" id="preview_btn" data-toggle="modal" (click)="modal(post._id)" data-target="#myModal"><i class="fa fa-eye"></i></button>
-                                    <button type="button" class="btn btn-danger"  (click)="delete(post._id)"><i class="fa fa-trash"></i></button></td>
+                                    <!-- <button type="button" class="btn btn-danger"  (click)="delete(post._id)"><i class="fa fa-trash"></i></button></td> -->
                             </tr>                                                      
                         </tbody>
                     </table>                    
                 </div>
-            </div> 
             </div>
-            <div  class="tab-pane" id="admin" (click)="getadminproduct();">
-
-                <div class="table-responsive m-t-20">
-                    <div id="example23_wrapper_2" class="dataTables_wrapper container-fluid dt-bootstrap4">       
-                                          
-                         <table id="example1"  class="display nowrap table table-hover table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;" >
-                         <thead>
-                             <tr>
-                                 <th>Product Name </th>
-                                 <th>Product Type  </th>
-                                 <th>Category  </th>
-                                 <th>Description  </th> 
-                                 <th> Image   </th>
-                                 <!-- <th>Banner Image   </th>
-                                 <th>Product Color   </th>
-                                 <th>Product Tags   </th> -->
-                                 <th>Action   </th>
-                             </tr>
-                         </thead> 
-                         <tbody id="table_body">
-                             <tr role="row" class="odd" id="sub_category_tr" *ngFor="let post of adminproductlist ">
-                                 <td>{{post.name}}</td>
-                                 <td>{{post.typeProduct}}</td>
-                                 <td>{{post.category.name}}</td>
-                                 <td><p [innerHTML]="post.description"></p></td>
-                                 <td><img  id="post_img" src="{{post.image[0]}}" /></td>
-                                 <!-- <td><img  id="post_img" src="{{post.bannerImage}}" /></td>
-                                 <td>{{post.color}}</td>
-                                 <td>{{post.tags}}</td> -->
-                                 <td>
-                                    <button type="button" id="edit_btn" class="btn btn-primary" (click)="modal1(post._id)">Add To <i class='fa fa-bitbucket'></i></button>
-                                     <button type="button" id="edit_btn" class="btn btn-primary" (click)="edit(post._id)"><i class="fa fa-edit"></i></button>
-                                     <button type="button" class="btn btn-primary" id="preview_btn" data-toggle="modal" (click)="modal(post._id)" data-target="#myModal"><i class="fa fa-eye"></i></button>
-                                     <button type="button" class="btn btn-danger"  (click)="delete(post._id)"><i class="fa fa-trash"></i></button></td>
-
-                                    </tr>                                                      
-                         </tbody>
-                     </table>                    
-                 </div>
-             </div> 
             </div>
         </div>
  </div> </div> 

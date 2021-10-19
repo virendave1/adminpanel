@@ -52,26 +52,6 @@ public Editor = ClassicEditor;
         this.getcategory();
       });
     }
-    
-    // insert2(){
-    //   this.submit='please wait';  
-    //   if(this.ProdImage !== null || this.ProdImage !== undefined){
-    //     this.picture = '';
-    //     console.log(this.picture);
-    //   } 
-    //   if(this.ProdImage === undefined || this.ProdImage === null){
-    //     console.log(this.ProdImage);   
-    //     this.thumbnailfile();
-    //   }
-    //   if(this.Prodbanner !== null || this.Prodbanner !== undefined){
-    //     this.bannerpicture='';
-    //     this.insert();
-    //   } 
-    //   if(this.Prodbanner === undefined || this.Prodbanner === null){
-    //     this.thumbnailfile2();
-    //   }
-    //   }
-
     ImageChange( File: FileList){
       for(let i=0;i<File.length;i++){
        this.Image=File.item(i);
@@ -79,27 +59,40 @@ public Editor = ClassicEditor;
      var reader=new FileReader();
      reader.onload=(event:any) => {
        this.pictureIMGSrc= event.target.result;
-       // console.log(this.pictureIMGSrc,'==============');
        }
      }
    }
+   public imagePath;
+imgURL: any;
+public message: string;
+previewimgcount:any=[];
+urls = new Array<string>();
+
+preview(event) {
+  this.urls = [];
+  let files = event.target.files;
+  if (files) {
+    for (let file of files) {
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.urls.push(e.target.result);
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+}
    ImageChange2( File: FileList){
     this.bannerImage=File.item(0);
-    // console.log(File);
     var reader=new FileReader();
     reader.onload=(event:any) => {
       this.bannerpictureIMGSrc= event.target.result;
-      // console.log(this.bannerpictureIMGSrc,'==============');
 
     }
   }
    thumbnailfile(img1,jlength,image1length){
-     // console.log(img1.name,'==== product images');
      const Image = img1;
      let foldername = this.ProdnameTxt.replace(/ /g, "_");
      this.FOLDER = "thumbnail/megazone/"+foldername;
-     // const contentType = Image.type;
-     // console.log(contentType,'thumbnail image');
      let fname = this.makeid(10);
      let ext = img1.name.substr(img1.name.lastIndexOf('.') + 1);
      fname = fname+'.'+ext;
@@ -128,11 +121,9 @@ public Editor = ClassicEditor;
                return false;
            }
            else{
-             // console.log('Successfully uploaded file.', data);
              this.picture1 = data.Location;
              this.Imagedata.push(this.picture1);  
              if(jlength+1 == image1length){
-            // console.log('call hua'); 
              this.finalinsert();  
              }
              return true;
@@ -145,7 +136,6 @@ public Editor = ClassicEditor;
    let foldername = this.ProdnameTxt.replace(/ /g, "_");
    this.FOLDER = "thumbnail/megazone/"+foldername;
    const contentType = this.bannerImage.type;
-   console.log(this.bannerImage);
    let fname = this.makeid(10);
    let ext = this.bannerImage.name.substr(this.bannerImage.name.lastIndexOf('.') + 1);
    fname = fname+'.'+ext;
@@ -174,33 +164,55 @@ public Editor = ClassicEditor;
              return false;
          }
          else{
-           // console.log('Successfully uploaded file.', data);
-           this.bannerpicture=data.Location; 
-           //  this.finalinsert();   
-           this.BannerImagedata=this.bannerpicture;
-           console.log(this.BannerImagedata);       
+           this.bannerpicture=data.Location;  
+           this.BannerImagedata=this.bannerpicture;       
            return true;
          }
      });
    }
    
-   // picture;
-   // img1;
+
+   ProdImage2;
+getfindbyid(){
+  const url = hostport + 'product/' +this.Id;
+  this.http.get( url , { headers: this.headers } )
+  .subscribe(Response => {
+    let result = Response.json();
+    const table=result.product;
+    console.log(table, 'product data');
+    this.ProdnameTxt = table.name;
+    this.Imagedata = table.image;
+    this.ProdImage = '';
+    this.Prodprice = table.price;
+    this.Prodsubcategory = table.subCategory._id;
+    this.Prodcategory = table.category._id;
+    this.Prodcolor = table.color;
+    this.Prodsku = table.sku;
+    this.Prodtags = table.tags;
+    this.Proddescription = table.description;
+    this.Prodtype=table.typeProduct;
+    this.Prodbanner=table.bannerImage;
+    this.categoryChange(this.Prodcategory); 
+  });
+}
+
+
+
    img1a = [];
    insert(){
-     console.log(this.Prodbanner,'banner');
-     console.log(this.ProdImage,'images');
      this.submit='please wait';  
+     console.log(this.Prodbanner, 'banner data');
+     console.log(this.ProdImage, 'product images');
      if(this.Prodbanner == undefined){
        if(this.Prodbanner == 'bnempty'){
-         console.log('11111111111');
          this.thumbnailfile2();
+         console.log('thumbnailfile2 call');
        } 
      }
 
-     if(this.ProdImage !== undefined){ 
+     if(this.ProdImage !== ''){ 
        if(this.ProdImage !== 'empty'){
-         console.log('22222222222');
+        console.log('thumbnailfile call');
          for(let j=0; j<=this.AllImage.length;j++){
            this.img1a = this.AllImage[j];
            const jlength = j;
@@ -209,35 +221,14 @@ public Editor = ClassicEditor;
          }
        }
      }
-      if(this.ProdImage === undefined || this.ProdImage === null || this.ProdImage  === 'empty'){
-       console.log('333333333333');
+      if(this.ProdImage === '' || this.ProdImage === null || this.ProdImage  === 'empty'){
        this.finalinsert();
      }
     
      
    }
-   
-   //  removeImg(){
-   //   this.pictureTxt ='';
-   //   this.Image = '';
-   //   this.pictureIMGSrc = '';
-   //   $('.preview1').removeClass('it');
-   //   $('.btn-rmv1').removeClass('rmv');
-   //  }
-   
+
    finalinsert(){
-     // if(this.ProdnameTxt === null){
-     //     this.ProdnameTxt = '';
-     //   }
-     //   if(this.ProdImage === null){
-     //     this.ProdImage = '';
-     //   }
-     // if(this.Prodsubcategory === null){
-     //     this.Prodsubcategory = '';
-     //   }
-     // if(this.Prodcategory === null){
-     //     this.Prodcategory = '';
-     //   }
      if(this.Prodcolor === null){
          this.Prodcolor = '';
        }
@@ -258,9 +249,7 @@ public Editor = ClassicEditor;
        }
      if(this.Prodprice === null){
          this.Prodprice = '';
-      }
-   // this.Proddescription= this.Editor.getData();
-   console.log(this.Imagedata,'All final data'); 
+      } 
      var jsonstr = { 
        "name":this.ProdnameTxt,
        "image":this.Imagedata,
@@ -275,19 +264,16 @@ public Editor = ClassicEditor;
        "price":this.Prodprice,
        } 
      var abc = JSON.stringify(jsonstr);
-       console.log(abc,"stringify===========");
      const url = hostport + 'product/'+this.Id;
      this.http.put( url , jsonstr, { headers: this.headers } )
      .subscribe(Response => {
        const result = Response.json(); 
-       // console.log(result);
       alert("Product Successfully Updated !");
       this.Imagedata = [];
       this.AllImage = [];
         this.router.navigate(['/Admin/product']);
      }, 
       error => {
-     //  const  = error.message;
      this.AllImage = [];
      this.ProdImage = 'empty';
      this.Prodbanner = 'bnempty'
@@ -330,16 +316,6 @@ public Editor = ClassicEditor;
      }
    }
    
-   // saveproduct(product:any){
-     // this.http.post( hostport +'product', product, { headers: this.headers } )
-     // .subscribe(Response => {
-       // console.log("hi");
-       // const result = Response.json(); 
-       // alert("Product Added Successfully !");
-         // this.router.navigate(['/Admin/product']);
-       // console.log(result);
-     // });
-   // }
    category:any;
    categorylist:any;
    getcategory(){
@@ -347,43 +323,26 @@ public Editor = ClassicEditor;
      .subscribe(Response => {
        const result = Response.json(); 
        this.categorylist = result.category;
-       // console.log(this.categorylist);
    });
    }
-   // category_id=localStorage.getItem("category_id");
    
    categoryChange(selectedValue: string){
    this.getsubcategory(selectedValue)
    }
+
+   subcategoryChange(selectedValue: string){
+    // this.getsubcategory(selectedValue)
+    }
    
    subcategorylist:any;
-   getsubcategory(category_id){
+   getsubcategory(category_id){ 
      this.http.get( hostport +'filter/menu/'+category_id, { headers: this.headers } )
      .subscribe(Response => {   
-       const result = Response.json(); 
+       const result = Response.json();   
        this.subcategorylist = result.product;
-     //  console.log(this.subcategorylist);
       
      });
    }    
-getfindbyid(){
-  const url = hostport + 'product/' +this.Id;
-  this.http.get( url , { headers: this.headers } )
-  .subscribe(Response => {
-    let result = Response.json();
-    console.log(result);
-    const table=result.product;
-    this.ProdnameTxt = table.name;
-    this.ProdImage = table.image;
-    this.Prodprice = table.price;
-    this.Prodsubcategory = table.subCategory.subCategory;
-    this.Prodcategory = table.category.name;
-    this.Prodcolor = table.color;
-    this.Prodsku = table.sku;
-    this.Prodtags = table.tags;
-    this.Proddescription = table.description;
-    this.Prodtype=table.typeProduct;
-    this.Prodbanner=table.bannerImage;
-  });
-}
+
+
 }

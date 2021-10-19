@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Email Address <span class="required">*</span></label>
-                                    <input type="text"  #email="ngModel" [(ngModel)]="emailTxt" name="email" class="form-control" placeholder="Email" > 
+                                    <input type="email"  #email="ngModel" [(ngModel)]="emailTxt" validateEmail = true; name="email" class="form-control" placeholder="Email" > 
                                 </div>
                             </div> 
                             <div class="col-md-6">

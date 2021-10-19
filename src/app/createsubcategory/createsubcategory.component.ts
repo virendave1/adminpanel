@@ -29,10 +29,8 @@ savesubcategory(subcategory:any){
     alert("SubCategory Added Successfully !");
       this.router.navigate(['/Admin/sub-category']);
       this.subcategory=result;
-    console.log(this.subcategory);
   },
   error => {
-    //  const  = error.message;
     this.subcategory = [];
     var valid =  error._body;
     valid = valid.replace(/[{},"]/g, "");
@@ -50,8 +48,6 @@ get(){
   .subscribe(Response => {
     const result = Response.json(); 
     this.categorylist = result.category;
-
-   console.log(this.categorylist);
   });
 }
 }

@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Http , Headers} from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { hostport,tabledats ,tabledats1} from 'src/app/app.component';
+import readXlsxFile from 'read-excel-file';
 import { ExcelService } from 'src/app/excel.service';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-featuredproduct',
+  templateUrl: './featuredproduct.component.html',
+  styleUrls: ['./featuredproduct.component.css']
 })
-export class ProductComponent implements OnInit {
+export class FeaturedproductComponent implements OnInit {
 
-  
+
   constructor(private router: Router,private http: Http,private excelService:ExcelService,private activatedRoute: ActivatedRoute) {
     this.headers.append('authorization', this.token);
    }
@@ -21,12 +22,9 @@ export class ProductComponent implements OnInit {
     this.activatedRoute.params.subscribe(paramsId => {
       const ID = paramsId.id;
       this.getproduct();   
-      this.getadminproduct();
-     
     });
   }
   Id:any;
-  btnname:any
 ProdnameTxt:any;
 ProdImage:any;
 Prodsubcategory:any;
@@ -52,24 +50,13 @@ Image: any;
   img:any;
   count:any;
   getproduct(){
-    this.http.get( hostport +'product', { headers: this.headers } )
+    this.http.get( hostport +'product/getFeatured', { headers: this.headers } )
     .subscribe(Response => {
       const result = Response.json(); 
       this.productlist = result.product;
       tabledats();
     });
   }
-  test : boolean ;
-adminproductlist:any;
-  getadminproduct(){
-    this.http.get( hostport +'admin/product', { headers: this.headers } )
-    .subscribe(Response => {
-      const result = Response.json(); 
-      this.adminproductlist = result.product;
-      tabledats1();
-    });
-  } 
-
   delete(id:any){
     const httpOptions = {
       headers: new Headers({
@@ -96,14 +83,14 @@ adminproductlist:any;
   DataFromEventEmitter(data:any) { 
     for(let i of data){
       this.productlist.push(i);
-    } 
+    }  
      this.exceluploadServer();
   }
   exceluploadServer(){
     var jsonstr = { 
       "content": this.productlist
     }
-    var abc = JSON.stringify(jsonstr); 
+    var abc = JSON.stringify(jsonstr);
     const url = hostport + 'product';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       
@@ -128,6 +115,7 @@ adminproductlist:any;
  edit(id:any){
   this.router.navigate(['/Admin/editproduct', {id: id }]);
 }
+
 images:any;
 getfindbyid(){
  const url = hostport + 'product/' +localStorage.getItem("productid");
@@ -146,22 +134,33 @@ getfindbyid(){
    this.Proddescription = table.description;
    this.Prodtype=table.typeProduct;
    this.Prodbanner=table.bannerImage;
-   this.test=table.isfeatured;
    this.images=this.ProdImage[0];
  });
 }
-isFeatured:any;
-submit:any;
+
+reloadComponent() {
+  let currentUrl = this.router.url;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([currentUrl]);
+  }
+
 getfeaturedproduct(){
   var jsonstr = { 
-    "isFeatured": true,
+    "isFeatured": false,
   }
   const url = hostport + 'product/featured/'+localStorage.getItem("productfeaturedid");
   this.http.post( url , jsonstr,{ headers: this.headers } )
   .subscribe(Response => {
     let result = Response.json();
-    alert("Product Added To Featured Product Successfully "); 
-    this.isFeatured=result.product.isFeatured;
+    const x = confirm('Are you sure you want to delete?');
+    if (x) {
+    alert("Product Deleted From Featured Product Successfully "); 
+    this.reloadComponent();
+    return true;
+  } else {
+  return false;
+  }
   });
 }
 
@@ -170,6 +169,7 @@ getfeaturedproduct(){
    localStorage.getItem("productid");
    this.getfindbyid();
  }
+ 
  modal1 (id:any){
   localStorage.setItem("productfeaturedid",id);
   localStorage.getItem("productfeaturedid");

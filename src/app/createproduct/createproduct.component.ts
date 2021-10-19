@@ -5,6 +5,8 @@ import { hostport } from '../app.component';
 import * as AWS from 'aws-sdk/global'; 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as S3 from 'aws-sdk/clients/s3';
+import { style } from '@angular/animations';
+import { EMPTY } from 'rxjs';
 declare const $: any;
 
 @Component({
@@ -13,6 +15,7 @@ declare const $: any;
   styleUrls: ['./createproduct.component.css']
 })
 export class CreateproductComponent implements OnInit {
+  url: any;
   // [x: string]: any; 
   constructor(private router: Router,private http: Http) { 
     this.headers.append('authorization', this.token);
@@ -48,20 +51,43 @@ bannerpictureIMGSrc:any;
  target:any;
  
  ImageChange( File: FileList){
-   for(let i=0;i<File.length;i++){
-    this.Image=File.item(i);
-    this.AllImage.push(this.Image);
-  var reader=new FileReader();
-  reader.onload=(event:any) => {
-    this.pictureIMGSrc= event.target.result;
-    // console.log(this.pictureIMGSrc,'==============');
+  for(let i=0;i<File.length;i++){
+   this.Image=File.item(i);
+   this.AllImage.push(this.Image);
+ var reader=new FileReader();
+ reader.onload=(event:any) => {
+   this.pictureIMGSrc= event.target.result;
+   }
+ }
+}
+public imagePath;
+imgURL: any;
+public message: string;
+previewimgcount:any=[];
+urls = new Array<string>();
+close:any;
+preview(event) {
+  this.urls = [];
+  let files = event.target.files;
+  if (files) {
+    for (let file of files) {
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.urls.push(e.target.result);
+      }
+      reader.readAsDataURL(file);
     }
   }
+}
+toggleDisplay() {
+  this.urls=[];
+}
+ deleteImage(url: any): void {
+  this.urls = this.urls.filter((a) => a !== url);
 }
 public Editor = ClassicEditor;
 ImageChange2( File: FileList){
   this.bannerImage=File.item(0);
-  // console.log(File);
   if(this.bannerImage==null || this.bannerImage==undefined){
     return null;
   }
@@ -69,18 +95,14 @@ ImageChange2( File: FileList){
   var reader=new FileReader();
   reader.onload=(event:any) => {
     this.bannerpictureIMGSrc= event.target.result;
-    // console.log(this.bannerpictureIMGSrc,'==============');
 }
   }
 }
 picture1;
 thumbnailfile(img1,jlength,image1length){
-  // console.log(img1.name,'==== product images');
   const Image = img1;
   let foldername = this.ProdnameTxt.replace(/ /g, "_");
   this.FOLDER = "thumbnail/megazone/"+foldername;
-  // const contentType = Image.type;
-  // console.log(contentType,'thumbnail image');
   let fname = this.makeid(10);
   let ext = img1.name.substr(img1.name.lastIndexOf('.') + 1);
   fname = fname+'.'+ext;
@@ -108,7 +130,6 @@ thumbnailfile(img1,jlength,image1length){
             return false;
         }
         else{
-          // console.log('Successfully uploaded file.', data);
           this.picture1 = data.Location;
           this.Imagedata.push(this.picture1);  
           if(jlength+1 == image1length){
@@ -124,7 +145,6 @@ thumbnailfile2(this: any){
 let foldername = this.ProdnameTxt.replace(/ /g, "_");
 this.FOLDER = "thumbnail/megazone/"+foldername;
 const contentType = this.bannerImage.type;
-console.log(this.bannerImage);
 let fname = this.makeid(10);
 let ext = this.bannerImage.name.substr(this.bannerImage.name.lastIndexOf('.') + 1);
 fname = fname+'.'+ext;
@@ -153,11 +173,8 @@ const bucket = new S3(
           return false;
       }
       else{
-        // console.log('Successfully uploaded file.', data);
-        this.bannerpicture=data.Location; 
-        //  this.finalinsert();   
-        this.BannerImagedata=this.bannerpicture;
-        console.log(this.BannerImagedata);       
+        this.bannerpicture=data.Location;   
+        this.BannerImagedata=this.bannerpicture;     
         return true;
       }
   });
@@ -167,18 +184,14 @@ const bucket = new S3(
 // img1;
 img1a = [];
 insert(){
-  console.log(this.Prodbanner,'banner');
-  console.log(this.ProdImage,'images');
   this.submit='please wait';  
   if(this.Prodbanner !== undefined){
     if(this.Prodbanner !== 'bnempty'){
-      console.log('11111111111');
       this.thumbnailfile2();
     }
   }
   if(this.ProdImage !== undefined){ 
     if(this.ProdImage !== 'empty'){
-      console.log('22222222222');
       for(let j=0; j<=this.AllImage.length;j++){
         this.img1a = this.AllImage[j];
         const jlength = j;
@@ -188,34 +201,16 @@ insert(){
     }
   }
    if(this.ProdImage === undefined || this.ProdImage === null || this.ProdImage  === 'empty'){
-    console.log('333333333333');
     this.finalinsert();
   }
  
   
 }
 
-//  removeImg(){
-//   this.pictureTxt ='';
-//   this.Image = '';
-//   this.pictureIMGSrc = '';
-//   $('.preview1').removeClass('it');
-//   $('.btn-rmv1').removeClass('rmv');
-//  }
+
 
 finalinsert(){
-	// if(this.ProdnameTxt === null){
-  //     this.ProdnameTxt = '';
-  //   }
-  //   if(this.ProdImage === null){
-  //     this.ProdImage = '';
-  //   }
-	// if(this.Prodsubcategory === null){
-  //     this.Prodsubcategory = '';
-  //   }
-	// if(this.Prodcategory === null){
-  //     this.Prodcategory = '';
-  //   }
+
  if(this.Prodcolor === null){
       this.Prodcolor = '';
     }
@@ -237,8 +232,6 @@ finalinsert(){
 	if(this.Prodprice === null){
       this.Prodprice = '';
     }
-// this.Proddescription= this.Editor.getData();
-console.log(this.Imagedata,'All final data'); 
   var jsonstr = { 
     "name":this.ProdnameTxt,
     "image":this.Imagedata,
@@ -253,19 +246,16 @@ console.log(this.Imagedata,'All final data');
     "price":this.Prodprice,
     } 
 	var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify===========");
   const url = hostport + 'product';
   this.http.post( url , jsonstr, { headers: this.headers } )
   .subscribe(Response => {
     const result = Response.json(); 
-    // console.log(result);
 	 alert("Product Added Successfully !");
    this.Imagedata = [];
    this.AllImage = [];
      this.router.navigate(['/Admin/product']);
   }, 
    error => {
-  //  const  = error.message;
   this.AllImage = [];
   this.ProdImage = 'empty';
   this.Prodbanner = 'bnempty'
@@ -277,7 +267,10 @@ console.log(this.Imagedata,'All final data');
     }
   );
   }
-
+  delete(id:any){
+  console.log(id);  
+  }
+  
    makeid(length: number) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -308,16 +301,6 @@ console.log(this.Imagedata,'All final data');
   }
 }
 
-// saveproduct(product:any){
-  // this.http.post( hostport +'product', product, { headers: this.headers } )
-  // .subscribe(Response => {
-    // console.log("hi");
-    // const result = Response.json(); 
-    // alert("Product Added Successfully !");
-      // this.router.navigate(['/Admin/product']);
-    // console.log(result);
-  // });
-// }
 category:any;
 categorylist:any;
 getcategory(){
@@ -325,23 +308,17 @@ getcategory(){
   .subscribe(Response => {
     const result = Response.json(); 
     this.categorylist = result.category;
-    // console.log(this.categorylist);
 });
 }
-// category_id=localStorage.getItem("category_id");
-
 categoryChange(selectedValue: string){
 this.getsubcategory(selectedValue)
 }
-
 subcategorylist:any;
 getsubcategory(category_id){
   this.http.get( hostport +'filter/menu/'+category_id, { headers: this.headers } )
   .subscribe(Response => {   
     const result = Response.json(); 
     this.subcategorylist = result.product;
-  //  console.log(this.subcategorylist);
-   
   });
 } 
 }

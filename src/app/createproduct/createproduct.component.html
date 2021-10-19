@@ -27,20 +27,27 @@
                             </div> 
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
-                                    <label class="control-label">Product Image <span class="required">*</span></label>
-                                    <input type="file" src=[url] accept="image/*" #image="ngModel" [(ngModel)]="ProdImage" name="image" title="" class="form-control" (change)="ImageChange($event.target.files)" multiple required/>
-                                    
-                                 </div>
+                                    <label class="control-label">Product Type <span class="required">*</span></label> 
+                                    <select id="Category"  #typeProduct [(ngModel)]="Prodtype" name="typeProduct" class="form-control" required>
+                                        <option value="All"> All Product</option>
+                                        <option value="Hot"> Hot Product</option>
+                                        <option value="New"> New Product</option>
+                                        <option value="Sales">Sales Product</option>
+                                        <option value="Best"> Best Sellers</option>
+                                    </select>
+                                </div>
                             </div> 
                         </div> 
                         <div class="row pt-3">
                             <div class="col-md-6">
+                               
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Category <span class="required">*</span></label>
                                     <select id="Category" #category [(ngModel)]="Prodcategory" name="category" class="form-control" (change)="categoryChange($event.target.value)" required>
                                         <option *ngFor="let post of categorylist" [value]="post._id"> {{post.name}}</option>
                                       </select>                                    
                                  </div>
+
                             </div> 
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
@@ -52,7 +59,7 @@
                             </div> 
                            
                         </div>
-                        <div class="row pt-3">
+                        <!-- <div class="row pt-3">
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Color </label>
@@ -77,26 +84,25 @@
                                     <input type="text" #tags [(ngModel)]="Prodtags" name="tags" class="form-control" placeholder="Product tag">                                    
                                  </div>
                             </div> 
-                        </div>
+                        </div> -->
                             <div class="row pt-3">
-                                <div class="col-md-6">
+                                
+                                <div class="col-md-12">
                                     <div class="form-group" id="category_form">
-                                        <label class="control-label">Product Type <span class="required">*</span></label> 
-                                        <select id="Category"  #typeProduct [(ngModel)]="Prodtype" name="typeProduct" class="form-control" required>
-                                            <option value="All"> All Product</option>
-                                            <option value="Hot"> Hot Product</option>
-                                            <option value="New"> New Product</option>
-                                            <option value="Sales">Sales Product</option>
-                                            <option value="Best"> Best Sellers</option>
-                                        </select>
+                                        <label class="control-label">Product Image <span class="required">*</span></label>
+                                        <input  id="inputfiles" #file type="file"  src=[url] accept="image/*" #image="ngModel" [(ngModel)]="ProdImage" name="image" title="" class="form-control" (change)="preview($event);ImageChange($event.target.files);" multiple required/>         
+                      
                                     </div>
-                                </div> 
-                                <div class="col-md-6">
+                                    <div id="preview_div" *ngIf="ProdImage">
+                                        <img id="preview_img" *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6">
                                     <div class="form-group" id="category_form">
                                         <label class="control-label">Banner Image</label>
                                         <input type="file" #bannerImage [(ngModel)]="Prodbanner" name="bannerImage"  accept="image/*" class="form-control" placeholder="Product Banner" (change)="ImageChange2($event.target.files)">                                    
                                      </div>
-                                </div> 
+                                </div>  -->
                                 </div>
                                 <div class="row pt-3">
                                     <div class="col-md-12">

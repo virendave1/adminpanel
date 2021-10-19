@@ -32,9 +32,7 @@ export class EditreviewComponent implements OnInit {
     .subscribe(Response => {
       let result = Response.json();
       const table=result;
-      console.log(table);
       this.reviewstatus = table.review.verified;
-      console.log(this.reviewstatus);
     });
   }
   insert(){ 
@@ -43,20 +41,18 @@ export class EditreviewComponent implements OnInit {
     var jsonstr = { 
       "verified":this.reviewstatus,
     }
-    console.log(jsonstr);
     if (this.reviewstatus== null){
       this.reviewstatus ='';
     }
     this.http.put( url, jsonstr, { headers: this.headers } )
     .subscribe(Response => {
       const result = Response.json(); 
-      console.log(result);
       this.router.navigate(['Admin/reviews']);
     },
     error => {
       var valid =  error._body;
       valid = valid.replace(/[{},"]/g, "");
-      valid = valid.replace(/message:/g,'')
+      valid = valid.replace(/message:/g,'');
       console.error('There was an error!', valid);
        alert(valid); 
         }

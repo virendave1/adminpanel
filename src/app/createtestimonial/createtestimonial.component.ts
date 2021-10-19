@@ -39,21 +39,16 @@ export class CreatetestimonialComponent implements OnInit {
    var reader=new FileReader();
    reader.onload=(event:any) => {
      this.pictureIMGSrc= event.target.result;
-  console.log(this.pictureIMGSrc,'==============');
      }
    }
  }
  public Editor = ClassicEditor;
  
 picture1;
-
 thumbnailfile(img1,jlength,image1length){
-   console.log(img1.name,'==== product images');
   const Image = img1;
   let foldername = this.testimonialname.replace(/ /g, "_");
   this.FOLDER = "thumbnail/megazone/"+foldername;
-  // const contentType = Image.type;
-  // console.log(contentType,'thumbnail image');
   let fname = this.makeid(10);
   let ext = img1.name.substr(img1.name.lastIndexOf('.') + 1);
   fname = fname+'.'+ext;
@@ -81,7 +76,6 @@ thumbnailfile(img1,jlength,image1length){
             return false;
         }
         else{
-          // console.log('Successfully uploaded file.', data);
           this.picture1 = data.Location;
           this.Imagedata.push(this.picture1);  
           if(jlength+1 == image1length){
@@ -92,12 +86,10 @@ thumbnailfile(img1,jlength,image1length){
     });
   }
   insert(){
-    console.log(this.testimonialimage,'images');
     this.submit='please wait';  
 
     if(this.testimonialimage !== undefined){ 
       if(this.testimonialimage !== 'empty'){
-        console.log('22222222222');
         for(let j=0; j<=this.AllImage.length;j++){
           this.img1a = this.AllImage[j];
           const jlength = j;
@@ -106,28 +98,12 @@ thumbnailfile(img1,jlength,image1length){
         }
       }
     }
-     if(this.testimonialimage === undefined || this.testimonialimage === null || this.testimonialimage  === 'empty'){
-
-      console.log('333333333333');
-      
+     if(this.testimonialimage === undefined || this.testimonialimage === null || this.testimonialimage  === 'empty'){      
       this.finalinsert();
     }
   }
   
-finalinsert(){
-	// if(this.testimonialname === null){
-  //     this.testimonialname = '';
-  //   }
-	// if(this.testdesignation === null){
-  //     this.testdesignation = '';
-  //   }
-
-//  if(this.testmessage === null){
-//        this.testmessage = '';
-//    }
-// this.testmessage= this.Editor.getData();
-
-console.log(this.Imagedata,'All final data'); 
+finalinsert(){ 
   var jsonstr = { 
     "name":this.testimonialname,
     "image":this.Imagedata,
@@ -135,19 +111,16 @@ console.log(this.Imagedata,'All final data');
     "message":this.testmessage,
     } 
 	var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify===========");
   const url = hostport + 'testimonials';
   this.http.post( url , jsonstr, { headers: this.headers } )
   .subscribe(Response => {
     const result = Response.json(); 
-     console.log(result);
 	 alert("Testimonial Added Successfully !");
     this.Imagedata=[];
    this.AllImage = [];
      this.router.navigate(['/Admin/testimonial']);
   }, 
    error => {
-  //  const  = error.message;
   this.AllImage = [];
   this.testimonialimage = 'empty';
   var valid =  error._body;

@@ -29,19 +29,21 @@ export class EdituserComponent implements OnInit {
     this.activatedRoute.params.subscribe(paramsId => {
       const ID = paramsId.id;
       this.Id = ID;
-      console.log(this.Id); 
       this.getfindbyid(); 
     });   
   }
    
   getfindbyid(){
-    const url = hostport + 'user/' +this.Id;
-    // const jsonstr1 = '{"_id":"' + this.Id + '"}';
-    // console.log(jsonstr1);
-    this.http.post( url ,  { headers: this.headers } )
+    var jsonstr = { 
+      "status":this.nameTxt,
+      "email":this.emailTxt,
+      "password":this.passwordTxt,
+          }
+    const url = hostport + 'admin/user/' +this.Id;
+
+    this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {
       let result = Response.json();
-      console.log(result);
       const table=result.user;
       this.nameTxt = table.name;
       this.emailTxt= table.email;
@@ -66,12 +68,10 @@ export class EdituserComponent implements OnInit {
     "password":this.passwordTxt
   }
   var abc = JSON.stringify(jsonstr);
-  console.log(abc,'=====');
   this.http.put( url, jsonstr, { headers: this.headers } )
   .subscribe(Response => {
     const result = Response.json(); 
-    console.log(result);
-    // this.router.navigate(['/Admin/registereduser']);
+this.router.navigate(['/Admin/registereduser']);
   },
     error => {
       var valid =  error._body;

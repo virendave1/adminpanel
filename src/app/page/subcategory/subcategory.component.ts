@@ -29,14 +29,12 @@ subcount:any;
     .subscribe(Response => {
       const result = Response.json(); 
       this.subcategorylist = result.subCategory;
-     console.log(this.subcategorylist);
      for(let i=0;i<=this.subcategorylist.length;i++){
-this.subcount=i;
+        this.subcount=i;
      }
      tabledats();
     });
   } 
-  
   delete(id:any){
     const httpOptions = {
       headers: new Headers({
@@ -64,7 +62,6 @@ this.subcount=i;
     for(let i of data){
       this.subcategorylist.push(i);
     } 
-    console.log(this.subcategorylist); 
      this.exceluploadServer();
   }
   exceluploadServer(){
@@ -72,7 +69,6 @@ this.subcount=i;
       "content": this.subcategorylist
     }
     var abc = JSON.stringify(jsonstr);
-    console.log(abc,"stringify==========="); 
     const url = hostport + 'subCategory';
     this.http.post( url , jsonstr, { headers: this.headers } )
     .subscribe(Response => {       

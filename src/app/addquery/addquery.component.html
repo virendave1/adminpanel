@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Email <span class="required">*</span></label>
-                                    <input type="text" #email [(ngModel)]="emailTxt" name="email" class="form-control" placeholder="Email" required>                                    
+                                    <input type="text" #email [(ngModel)]="emailTxt" name="email" class="form-control" validateEmail = true;   placeholder="Email" required>                                    
                                  </div>
                             </div> 
                             </div>
@@ -51,7 +51,7 @@
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Contact <span class="required">*</span></label>
-                                    <input type="text" #contact [(ngModel)]="contactTxt" name="contact" class="form-control" placeholder="Contact No" required>                                    
+                                    <input type="number" #contact [(ngModel)]="contactTxt" name="contact" class="form-control" placeholder="Contact No" required>                                    
                                  </div>
                             </div> 
                             <div class="col-md-6">

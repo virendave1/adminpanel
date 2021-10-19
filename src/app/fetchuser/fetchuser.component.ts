@@ -19,13 +19,11 @@ export class FetchuserComponent implements OnInit {
   }
   userlist:any;
   get(){
-    this.http.get( hostport +'user', { headers: this.headers } )
+    this.http.get( hostport +'admin/users', { headers: this.headers } )
     .subscribe(Response => {
       const result = Response.json(); 
       this.userlist = result.user;
       tabledats();
-     console.log(this.userlist);
-
     });
   }
   

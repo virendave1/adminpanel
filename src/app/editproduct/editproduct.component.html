@@ -25,11 +25,18 @@
                                     <input type="text" #name  [(ngModel)]="ProdnameTxt" name="name" class="form-control" placeholder="Product Name" required>                                    
                                  </div>
                             </div> 
+                           
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
-                                    <label class="control-label">Product Image <span class="required">*</span></label>
-                                    <input type="file"  accept="image/*" #image="ngModel" [(ngModel)]="ProdImage" name="image" title="" class="form-control" (change)="ImageChange($event.target.files)" multiple required/>
-                                 </div>
+                                    <label class="control-label">Product Type <span class="required">*</span></label> 
+                                    <select id="Category"  #typeProduct [(ngModel)]="Prodtype" name="typeProduct" class="form-control" required>
+                                        <option value="All"> All Product</option>
+                                        <option value="Hot"> Hot Product</option>
+                                        <option value="New"> New Product</option>
+                                        <option value="Sales">Sales Product</option>
+                                        <option value="Best"> Best Sellers</option>
+                                    </select>
+                                </div>
                             </div> 
                         </div> 
                         <div class="row pt-3">
@@ -45,13 +52,13 @@
                         <div class="col-md-6">
                             <div class="form-group" id="category_form">
                                 <label class="control-label">Sub Category <span class="required">*</span></label>
-                                <select id="Category" #subCategory [(ngModel)]="Prodsubcategory" name="subCategory" class="form-control" required>
+                                <select id="Category" #subCategory [(ngModel)]="Prodsubcategory" name="subCategory" class="form-control" (change)="subcategoryChange($event.target.value)" required>
                                     <option *ngFor="let post of subcategorylist" [value]="post._id"> {{post.subCategory}}</option>
                                   </select>                                
                              </div>
                         </div> 
                         </div>
-                        <div class="row pt-3">
+                        <!-- <div class="row pt-3">
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Color </label>
@@ -64,8 +71,8 @@
                                     <input type="text" #sku [(ngModel)]="Prodsku" name="sku" class="form-control" placeholder="Product SKU" >                                    
                                  </div>
                             </div> 
-                            </div>
-                        <div class="row pt-3">
+                            </div> -->
+                        <!-- <div class="row pt-3">
                             <div class="col-md-6">
                                 <div class="form-group" id="category_form">
                                     <label class="control-label">Price</label>
@@ -79,27 +86,23 @@
                                     <input type="text" #tags [(ngModel)]="Prodtags" name="tags" class="form-control" placeholder="Product tag">                                    
                                  </div>
                             </div> 
-                        </div>
+                        </div> -->
                             <div class="row pt-3">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group" id="category_form">
-                                        <label class="control-label">Product Type <span class="required">*</span></label> 
-                                        <select id="Category"  #typeProduct [(ngModel)]="Prodtype" name="typeProduct" class="form-control" required>
-                                            <option value="All"> All Product</option>
-                                            <option value="Hot"> Hot Product</option>
-                                            <option value="New"> New Product</option>
-                                            <option value="Sales">Sales Product</option>
-                                            <option value="Best"> Best Sellers</option>
-                                        </select>
+                                        <label class="control-label">Product Image <span class="required">*</span></label>
+                                        <input  #file type="file"  src=[url] accept="image/*" #image="ngModel" [(ngModel)]="ProdImage" name="image" title="" class="form-control" (change)="preview($event);ImageChange($event.target.files);" multiple />         
+                                     </div>
+                                     <div id="preview_div">
+                                        <img id="preview_img" *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
                                     </div>
-                                    
                                 </div> 
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group" id="category_form">
                                         <label class="control-label">Banner Image</label>
                                         <input type="file" #bannerImage [(ngModel)]="Prodbanner" name="bannerImage"  accept="image/*" class="form-control" placeholder="Product Banner"  (change)="ImageChange2($event.target.files)">                                    
                                      </div>
-                                </div> 
+                                </div>  -->
                                 </div>
                                 <div class="row pt-3">
                                     <div class="form-group col-md-12" id="category_form">
