@@ -26,6 +26,7 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { CreatetestimonialComponent } from './createtestimonial/createtestimonial.component';
 import { EdittestimonialComponent } from './edittestimonial/edittestimonial.component';
 import { FeaturedproductComponent } from './featuredproduct/featuredproduct.component';
+import { ContactusComponent } from './contactus/contactus.component';
 
 const routes: Routes = [
   { path:'', component:LoginComponent, pathMatch: 'full'  },
@@ -43,6 +44,7 @@ const routes: Routes = [
    { path:'sub-category', component:SubcategoryComponent},
    {path:'edituser',component:EdituserComponent},
    { path:'product', component:ProductComponent},
+   {path:'contact',component:ContactusComponent},
    {path:'editproduct',component:EditproductComponent},
    {path:'createsub-category',component:CreatesubcategoryComponent},
    { path:'registeration', component:RegisterationComponent},

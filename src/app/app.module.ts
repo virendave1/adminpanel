@@ -37,6 +37,7 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { EdittestimonialComponent } from './edittestimonial/edittestimonial.component';
 import { CreatetestimonialComponent } from './createtestimonial/createtestimonial.component';
 import { FeaturedproductComponent } from './featuredproduct/featuredproduct.component';
+import { ContactusComponent } from './contactus/contactus.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { FeaturedproductComponent } from './featuredproduct/featuredproduct.comp
     EdittestimonialComponent,
     CreatetestimonialComponent,
     FeaturedproductComponent,
+    ContactusComponent,
   ],
   imports: [
     BrowserModule,

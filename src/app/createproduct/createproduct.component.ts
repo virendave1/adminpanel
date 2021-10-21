@@ -79,9 +79,6 @@ preview(event) {
     }
   }
 }
-toggleDisplay() {
-  this.urls=[];
-}
  deleteImage(url: any): void {
   this.urls = this.urls.filter((a) => a !== url);
 }
@@ -321,4 +318,7 @@ getsubcategory(category_id){
     this.subcategorylist = result.product;
   });
 } 
+Hide:any=[];
+ 
+
 }
